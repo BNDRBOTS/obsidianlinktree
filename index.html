@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BNDR LLC | Scott Bender</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bone: #F3F2EE;
+            --color-charcoal-light: #2C2D30;
+            --color-charcoal: #1A1B1E;
+            --color-void: #070708;
+            --space-base: 8px;
+            --ease-athletic: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-hardware: cubic-bezier(0.85, 0, 0.15, 1);
+            --black-ice: #000000;
+            --black-void: #070708;
+            --black-onyx: #121316;
+        }
+
+        body {
+            font-family: 'Sora', sans-serif;
+            background-color: var(--black-ice);
+            color: var(--color-bone);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, .display-font {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 0.05em;
+        }
+
+        /* 🌊 WEBGL CANVAS CONTAINER 🌊 */
+        #ocean-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -4;
+            pointer-events: none;
+        }
+
+        /* Atmosphere Overlays */
+        .liquid-atmosphere {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh; z-index: -3;
+            background: linear-gradient(to bottom, rgba(7,7,8,0.2) 0%, rgba(18,19,22,0.5) 60%, rgba(0,0,0,0.8) 100%);
+            pointer-events: none;
+        }
+        
+        .mesh-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2;
+            opacity: 0.08; pointer-events: none;
+            background-image: radial-gradient(var(--color-bone) 0.5px, transparent 0.5px);
+            background-size: 8px 8px;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+        }
+        
+        .noise-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
+            opacity: 0.12; pointer-events: none; mix-blend-mode: overlay;
+        }
+
+        /* 💎🔥 QUANTUM SILK BLACK GLASSMORPHISM BLOB 🔥💎 */
+        @keyframes liquidFloat {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* HARDWARE ACCELERATED BUTTER FLUIDITY */
+        @keyframes hyperFluidWobble {
+            0%, 100% { border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%; transform: translate3d(0,0,0) rotate(0deg) scale(1); }
+            33% { border-radius: 72% 28% 48% 52% / 51% 36% 64% 49%; transform: translate3d(0,0,0) rotate(12deg) scale(1.05); }
+            66% { border-radius: 34% 66% 32% 68% / 33% 71% 29% 67%; transform: translate3d(0,0,0) rotate(-8deg) scale(0.97); }
+        }
+
+        .liquid-orb-profile {
+            position: relative; width: 140px; height: 140px; display: flex; align-items: center; justify-content: center;
+            animation: liquidFloat 6s ease-in-out infinite; z-index: 10;
+        }
+
+        .obsidian-jelly {
+            width: 100%; height: 100%; position: relative; z-index: 2;
+            background: radial-gradient(circle at 20% 20%, rgba(60,60,65,0.8) 0%, rgba(10,10,12,0.9) 40%, rgba(0,0,0,1) 100%);
+            animation: hyperFluidWobble 2.5s ease-in-out infinite;
+            box-shadow: 
+                inset 10px 10px 20px rgba(255, 255, 255, 0.15),
+                inset -10px -10px 20px rgba(0, 0, 0, 0.9),
+                inset 0 0 10px rgba(255, 255, 255, 0.08),
+                0 20px 45px rgba(0, 0, 0, 0.9),
+                0 0 30px rgba(255, 255, 255, 0.05);
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            transition: all 0.5s var(--ease-athletic);
+        }
+
+        .liquid-orb-profile:hover .obsidian-jelly {
+            box-shadow: inset 10px 10px 20px rgba(255, 255, 255, 0.25), inset -10px -10px 20px rgba(0, 0, 0, 1), inset 0 0 10px rgba(255, 255, 255, 0.12), 0 25px 50px rgba(0, 0, 0, 1), 0 0 50px rgba(255, 255, 255, 0.1);
+            transform: scale(1.05); border-color: rgba(255,255,255,0.3);
+        }
+
+        /* Aerodynamic Cards */
+        .aerodynamic-card {
+            background: linear-gradient(180deg, rgba(18, 19, 22, 0.3) 0%, rgba(7, 7, 8, 0.6) 100%);
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(243, 242, 238, 0.05); border-radius: 9999px; transition: all 0.6s var(--ease-athletic);
+            text-decoration: none; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between;
+        }
+        
+        .aerodynamic-card::before {
+            content: ''; position: absolute; top: 0; left: -150%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(243, 242, 238, 0.05), transparent);
+            transform: skewX(-20deg); transition: left 0.7s var(--ease-hardware);
+        }
+        
+        .aerodynamic-card:hover {
+            border: 1px solid rgba(243, 242, 238, 0.3); transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.95), inset 0 1px 1px rgba(243, 242, 238, 0.15);
+            background: linear-gradient(180deg, rgba(18, 19, 22, 0.5) 0%, rgba(7, 7, 8, 0.9) 100%);
+        }
+        
+        .aerodynamic-card:hover::before { left: 150%; }
+        .aerodynamic-card:active { transform: translateY(0px) scale(0.98); transition: all 0.1s ease-out; }
+
+        .icon-housing {
+            background: var(--black-ice); border: 1px solid rgba(243, 242, 238, 0.08); border-radius: 50%;
+            transition: all 0.5s var(--ease-athletic); display: flex; align-items: center; justify-content: center;
+        }
+        
+        .aerodynamic-card:hover .icon-housing {
+            background: var(--color-bone); border-color: var(--color-bone); transform: rotate(-10deg) scale(1.05);
+            box-shadow: 0 0 20px rgba(243, 242, 238, 0.2);
+        }
+        
+        .aerodynamic-card:hover .custom-svg { stroke: var(--black-ice); }
+        .custom-svg { transition: stroke 0.5s var(--ease-athletic); }
+
+        /* 💎🔥 SECURE MODAL PROTOCOL 🔥💎 */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 100;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            opacity: 0; pointer-events: none; transition: all 0.5s var(--ease-athletic);
+            display: flex; align-items: center; justify-content: center; padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            opacity: 1; pointer-events: auto;
+        }
+
+        .modal-content {
+            transform: translateY(30px) scale(0.95); transition: all 0.5s var(--ease-athletic);
+            width: 100%; max-width: 580px; padding: 3.5rem 3rem; flex-direction: column; align-items: flex-start;
+            cursor: default;
+            background: #030303;
+            border: 1px solid rgba(243, 242, 238, 0.08);
+            border-radius: 2rem;
+            /* 🔥 THE CREME-DE-LA-CHROMIUM GLOW 🔥 */
+            box-shadow: 0 0 60px rgba(243, 242, 238, 0.08), inset 0 0 20px rgba(243, 242, 238, 0.03);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .close-modal-btn {
+            position: absolute; top: 1.5rem; right: 1.5rem; cursor: pointer;
+        }
+        
+        .close-modal-btn:hover {
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        .reveal-element { opacity: 0; transform: translateY(30px) scale(0.95); animation: bootSequence 1s var(--ease-athletic) forwards; }
+        @keyframes bootSequence { to { opacity: 1; transform: translateY(0) scale(1); } }
+        .delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; } .delay-5 { animation-delay: 0.5s; } .delay-6 { animation-delay: 0.6s; } .delay-7 { animation-delay: 0.7s; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center px-4 py-16 relative selection:bg-[#F3F2EE] selection:text-[#070708]">
+    
+    <!-- 🔥 THE MISSING CANVAS IS NOW BOLTED TO THE DOM 🔥 -->
+    <canvas id="ocean-canvas"></canvas>
+
+    <div class="liquid-atmosphere"></div>
+    <div class="mesh-overlay"></div>
+    <svg class="noise-overlay" xmlns="http://www.w3.org/2000/svg">
+        <filter id="noiseFilter">
+            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/>
+        </filter>
+        <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
+    </svg>
+
+    <main class="max-w-2xl w-full flex flex-col items-center text-center z-10">
+        <!-- 💎🔥 THE SUPREME BLACK ACE ORB 🔥💎 -->
+        <div class="relative group cursor-default reveal-element">
+            <div class="liquid-orb-profile">
+                <div class="obsidian-jelly">
+                    <svg viewBox="0 0 100 100" class="w-16 h-16 fill-none stroke-[#F3F2EE] stroke-[2] group-hover:scale-110 transition-transform duration-700 var(--ease-athletic) drop-shadow-[0_0_8px_rgba(255,255,255,0.4)] z-20">
+                        <circle cx="50" cy="50" r="30" stroke-opacity="0.3"/>
+                        <path d="M20 50 C40 20, 80 30, 80 50 C80 70, 60 80, 20 50 Z" stroke-linejoin="round" stroke-linecap="round"/>
+                        <circle cx="65" cy="50" r="4" fill="#F3F2EE"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-[#F3F2EE] text-[#070708] text-[9px] font-bold px-6 py-2 rounded-full tracking-[0.3em] uppercase shadow-[0_8px_16px_rgba(255,255,255,0.15)] backdrop-blur-md z-20 transition-all duration-500 group-hover:bg-[var(--black-ice)] group-hover:text-white group-hover:border-white group-hover:border-[1px]">
+                BNDR Holdings
+            </div>
+        </div>
+
+        <div class="space-y-3 w-full pt-12 pb-10 reveal-element delay-1">
+            <h1 class="text-4xl md:text-6xl font-black display-font uppercase text-[#F3F2EE] drop-shadow-[0_0_15px_rgba(243,242,238,0.2)]">
+                BNDR LLC
+            </h1>
+            <p class="text-[#A8A8A8] font-light max-w-sm mx-auto text-xs md:text-sm leading-relaxed tracking-[0.1em] uppercase">
+                Scott Bender<br><br>
+                We build good businesses<br>and stay close to the work.
+            </p>
+        </div>
+
+        <nav class="w-full flex flex-col space-y-5 pt-2 max-w-lg mx-auto">
+            <a href="#" onclick="openModal('modal-portfolio'); event.preventDefault();" class="aerodynamic-card w-full p-3 pl-8 pr-3 group reveal-element delay-2">
+                <div class="text-left py-2">
+                    <h2 class="display-font text-[#F3F2EE] text-2xl tracking-wide group-hover:translate-x-2 transition-transform duration-500 var(--ease-athletic)">PORTFOLIO</h2>
+                    <p class="text-[10px] text-[#A8A8A8] uppercase tracking-[0.2em] font-semibold mt-0.5 group-hover:translate-x-2 transition-transform duration-500 delay-75 var(--ease-athletic)">What we own, back, and operate.</p>
+                </div>
+                <div class="icon-housing w-14 h-14 shrink-0">
+                    <svg class="custom-svg w-6 h-6 stroke-[#F3F2EE] fill-none stroke-[2]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 2C14.5 5 16 8.5 16 12C16 15.5 14.5 19 12 22C9.5 19 8 15.5 8 12C8 8.5 9.5 5 12 2Z"/>
+                        <line x1="2" y1="12" x2="22" y2="12"/>
+                    </svg>
+                </div>
+            </a>
+            <a href="#" onclick="openModal('modal-current'); event.preventDefault();" class="aerodynamic-card w-full p-3 pl-8 pr-3 group reveal-element delay-3">
+                <div class="text-left py-2">
+                    <h2 class="display-font text-[#F3F2EE] text-2xl tracking-wide group-hover:translate-x-2 transition-transform duration-500 var(--ease-athletic)">CURRENT WORK</h2>
+                    <p class="text-[10px] text-[#A8A8A8] uppercase tracking-[0.2em] font-semibold mt-0.5 group-hover:translate-x-2 transition-transform duration-500 delay-75 var(--ease-athletic)">The companies and projects we’re focused on now.</p>
+                </div>
+                <div class="icon-housing w-14 h-14 shrink-0">
+                    <svg class="custom-svg w-6 h-6 stroke-[#F3F2EE] fill-none stroke-[2]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 22H22L12 2Z"/>
+                        <path d="M12 10L12 14"/>
+                        <circle cx="12" cy="18" r="1"/>
+                    </svg>
+                </div>
+            </a>
+            <a href="#" onclick="openModal('modal-contact'); event.preventDefault();" class="aerodynamic-card w-full p-3 pl-8 pr-3 group reveal-element delay-4">
+                <div class="text-left py-2">
+                    <h2 class="display-font text-[#F3F2EE] text-2xl tracking-wide group-hover:translate-x-2 transition-transform duration-500 var(--ease-athletic)">CONTACT</h2>
+                    <p class="text-[10px] text-[#A8A8A8] uppercase tracking-[0.2em] font-semibold mt-0.5 group-hover:translate-x-2 transition-transform duration-500 delay-75 var(--ease-athletic)">Direct, private communication.</p>
+                </div>
+                <div class="icon-housing w-14 h-14 shrink-0">
+                    <svg class="custom-svg w-6 h-6 stroke-[#F3F2EE] fill-none stroke-[2]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 16.92V21A2 2 0 0119.82 23C13.88 22.72 8.34 19.96 4.22 15.78C0.0399999 11.66 -2.71 6.12 2.01 0.180004A2 2 0 014 0.00000392H8.08C8.54366 -0.0150917 8.99596 0.145892 9.35104 0.443152C9.70611 0.740411 9.94002 1.15392 10.01 1.61C10.1256 2.76611 10.4221 3.89531 10.89 4.96C11.1118 5.46604 11.018 6.04618 10.65 6.46L8.41 8.7C10.3601 12.1264 13.1736 14.9399 16.6 16.89L18.84 14.65C19.2538 14.282 19.834 14.1882 20.34 14.41C21.4047 14.8779 22.5339 15.1744 23.69 15.29C24.1613 15.3621 24.5857 15.61 24.881 15.98C25.1764 16.3501 25.322 16.8153 25.29 17.29L22 16.92Z"/>
+                    </svg>
+                </div>
+            </a>
+        </nav>
+
+        <footer class="pt-16 pb-8 w-full mt-auto reveal-element delay-5">
+            <div class="w-full flex items-center justify-center space-x-6">
+                <div class="h-[1px] w-12 bg-white/20"></div>
+                <p class="text-[10px] text-[#A8A8A8] font-bold tracking-[0.3em] uppercase">
+                    Long-term focus. Measured execution.
+                </p>
+                <div class="h-[1px] w-12 bg-white/20"></div>
+            </div>
+        </footer>
+
+        <!-- 💎 MODAL VAULTS 💎 -->
+        
+        <!-- Portfolio Modal -->
+        <div id="modal-portfolio" class="modal-overlay" onclick="closeModal(event, 'modal-portfolio')">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <div class="close-modal-btn w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors border border-white/10" onclick="closeModal(null, 'modal-portfolio')">
+                    <svg class="w-4 h-4 stroke-[#F3F2EE] fill-none stroke-[2]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </div>
+                <div class="mb-5 w-full text-left">
+                    <h3 class="display-font text-[#F3F2EE] text-[2.75rem] leading-none tracking-wide">PORTFOLIO</h3>
+                    <p class="text-[0.65rem] text-[#A8A8A8] uppercase tracking-[0.25em] font-semibold mt-2">What we own, back, and operate.</p>
+                </div>
+                <div class="w-full h-[1px] bg-[#2C2D30] mb-6"></div>
+                <div class="text-[#8e8e93] font-light text-[0.95rem] leading-[1.8] tracking-[0.02em] space-y-5 text-left w-full">
+                    <p>BNDR Holdings maintains a strict, concentrated portfolio of high-leverage assets and operating companies. We do not deploy capital for the sake of deployment.</p>
+                    <p>We acquire, build, and scale with a multi-decade time horizon. Every asset in the portfolio is structured for uncompromising yield, operational autonomy, and absolute market resilience.</p>
+                    <ul class="list-none space-y-4 mt-6 pl-2">
+                        <li class="flex items-center text-[#F3F2EE]"><span class="w-1.5 h-1.5 bg-[#F3F2EE] rounded-full mr-4 shadow-[0_0_8px_rgba(243,242,238,0.5)]"></span> Majority Equity Stakes</li>
+                        <li class="flex items-center text-[#F3F2EE]"><span class="w-1.5 h-1.5 bg-[#F3F2EE] rounded-full mr-4 shadow-[0_0_8px_rgba(243,242,238,0.5)]"></span> Strategic Joint Ventures</li>
+                        <li class="flex items-center text-[#F3F2EE]"><span class="w-1.5 h-1.5 bg-[#F3F2EE] rounded-full mr-4 shadow-[0_0_8px_rgba(243,242,238,0.5)]"></span> Wholly Owned Subsidiaries</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Work Modal -->
+        <div id="modal-current" class="modal-overlay" onclick="closeModal(event, 'modal-current')">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <div class="close-modal-btn w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors border border-white/10" onclick="closeModal(null, 'modal-current')">
+                    <svg class="w-4 h-4 stroke-[#F3F2EE] fill-none stroke-[2]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </div>
+                <div class="mb-5 w-full text-left">
+                    <h3 class="display-font text-[#F3F2EE] text-[2.75rem] leading-none tracking-wide">CURRENT WORK</h3>
+                    <p class="text-[0.65rem] text-[#A8A8A8] uppercase tracking-[0.25em] font-semibold mt-2">Active deployment & scaling.</p>
+                </div>
+                <div class="w-full h-[1px] bg-[#2C2D30] mb-6"></div>
+                <div class="text-[#8e8e93] font-light text-[0.95rem] leading-[1.8] tracking-[0.02em] space-y-5 text-left w-full">
+                    <p>Execution is the only metric that matters. Our current bandwidth is entirely dedicated to optimizing our active ventures and refining our core infrastructure.</p>
+                    <p>We remain heavily embedded in the day-to-day operations of our primary holdings, ensuring that architectural decisions align with long-term capital efficiency.</p>
+                    <div class="mt-6 p-5 bg-[#050505] border border-[#1A1B1E] rounded-[1rem]">
+                        <p class="text-[0.65rem] text-[#F3F2EE] uppercase tracking-[0.2em] font-bold mb-3">Immediate Focus</p>
+                        <p class="text-[#8e8e93] leading-[1.7]">Scaling operational throughput, integrating sovereign AI architecture, and finalizing strategic acquisitions for Q3.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Modal -->
+        <div id="modal-contact" class="modal-overlay" onclick="closeModal(event, 'modal-contact')">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <div class="close-modal-btn w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors border border-white/10" onclick="closeModal(null, 'modal-contact')">
+                    <svg class="w-4 h-4 stroke-[#F3F2EE] fill-none stroke-[2]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </div>
+                <div class="mb-5 w-full text-left">
+                    <h3 class="display-font text-[#F3F2EE] text-[2.75rem] leading-none tracking-wide">SECURE COMMS</h3>
+                    <p class="text-[0.65rem] text-[#A8A8A8] uppercase tracking-[0.25em] font-semibold mt-2">Direct, private communication.</p>
+                </div>
+                <div class="w-full h-[1px] bg-[#2C2D30] mb-6"></div>
+                <div class="text-[#8e8e93] font-light text-[0.95rem] leading-[1.8] tracking-[0.02em] space-y-5 text-left w-full">
+                    <p>Time is the ultimate non-renewable asset. Inquiries regarding capital allocation, acquisitions, or high-level partnerships should be clear, concise, and direct.</p>
+                    <p>For all serious matters, route communications through the secure line below. Unsolicited pitches will be logged and discarded.</p>
+                    
+                    <a href="mailto:inquiries@bndr.holdings" class="mt-8 w-full flex items-center justify-between px-5 py-4 border border-[#2C2D30] bg-[#050505] hover:bg-[#1A1B1E] rounded-[1rem] transition-colors group">
+                        <div class="flex items-center space-x-4">
+                            <svg class="w-5 h-5 stroke-[#A8A8A8] fill-none stroke-[1.5]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            <span class="text-[#F3F2EE] text-[0.7rem] font-bold tracking-[0.15em] uppercase">INITIATE TRANSMISSION</span>
+                        </div>
+                        <svg class="w-4 h-4 stroke-[#A8A8A8] group-hover:stroke-[#F3F2EE] group-hover:translate-x-1 transition-all fill-none stroke-[1.5]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 🌊 RAW WEBGL SHADER SCRIPT: HIGH DEF SLOW MO NIGHT OCEAN 🌊 -->
+    <script>
+        // --- MODAL CONTROLLERS ---
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal(event, modalId) {
+            if (event && event.target.id !== modalId && !event.target.closest('.close-modal-btn')) return;
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = ''; // Restore background scrolling
+        }
+
+        const canvas = document.getElementById('ocean-canvas');
+        
+        // Added Diamond-Plated Safety Checks
+        if (canvas) {
+            const gl = canvas.getContext('webgl');
+
+            if (gl) {
+                function resize() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                    gl.viewport(0, 0, canvas.width, canvas.height);
+                }
+                window.addEventListener('resize', resize);
+                resize();
+
+                const vsSource = `
+                    attribute vec2 position;
+                    void main() {
+                        gl_Position = vec4(position, 0.0, 1.0);
+                    }
+                `;
+
+                // FULLY FUNCTIONAL PURE GLSL FRACTAL BROWNIAN MOTION SHADER 
+                const fsSource = `
+                    precision highp float;
+                    uniform float u_time;
+                    uniform vec2 u_resolution;
+
+                    float hash(vec2 p) {
+                        return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+                    }
+
+                    float noise(vec2 p) {
+                        vec2 i = floor(p);
+                        vec2 f = fract(p);
+                        f = f * f * (3.0 - 2.0 * f);
+                        float a = hash(i);
+                        float b = hash(i + vec2(1.0, 0.0));
+                        float c = hash(i + vec2(0.0, 1.0));
+                        float d = hash(i + vec2(1.0, 1.0));
+                        return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+                    }
+
+                    float fbm(vec2 p) {
+                        float v = 0.0;
+                        float a = 0.5;
+                        vec2 shift = vec2(100.0);
+                        mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.5));
+                        for (int i = 0; i < 5; ++i) {
+                            v += a * noise(p);
+                            p = rot * p * 2.0 + shift;
+                            a *= 0.5;
+                        }
+                        return v;
+                    }
+
+                    void main() {
+                        vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+                        uv = uv * 2.0 - 1.0;
+                        uv.x *= u_resolution.x / u_resolution.y;
+
+                        float t = u_time * 0.4; // 💎 ENHANCED KINETIC FLOW (was 0.2)
+
+                        vec2 q = vec2(0.0);
+                        q.x = fbm(uv + 0.00 * t);
+                        q.y = fbm(uv + vec2(1.0));
+
+                        vec2 r = vec2(0.0);
+                        r.x = fbm(uv + 1.0 * q + vec2(1.7, 9.2) + 0.15 * t);
+                        r.y = fbm(uv + 1.0 * q + vec2(8.3, 2.8) + 0.12 * t);
+
+                        float f = fbm(uv + r);
+
+                        // Deep night ocean palette
+                        vec3 color = mix(vec3(0.01, 0.01, 0.015), vec3(0.06, 0.06, 0.07), f);
+                        color = mix(color, vec3(0.0, 0.0, 0.0), clamp(length(q), 0.0, 1.0));
+                        color = mix(color, vec3(0.12, 0.13, 0.14), clamp(length(r.x), 0.0, 1.0));
+                        
+                        // 💨 MIDNIGHT VAPOR PROTOCOL 💨
+                        float vapor = smoothstep(0.2, 0.8, f) * 0.7;
+                        color += vec3(0.06, 0.09, 0.14) * vapor; // Ghostly deep-sea mist
+                        
+                        // Foam/Highlights thrashing in the void
+                        float highlight = f * f * f * 3.5;
+                        color += vec3(0.18, 0.20, 0.22) * highlight;
+                        
+                        // Abyssal Depth vignette
+                        float vignette = 1.0 - smoothstep(0.3, 1.5, length(uv));
+                        color *= vignette;
+
+                        gl_FragColor = vec4(color, 1.0);
+                    }
+                `;
+
+                const vs = gl.createShader(gl.VERTEX_SHADER);
+                gl.shaderSource(vs, vsSource);
+                gl.compileShader(vs);
+
+                const fs = gl.createShader(gl.FRAGMENT_SHADER);
+                gl.shaderSource(fs, fsSource);
+                gl.compileShader(fs);
+
+                const program = gl.createProgram();
+                gl.attachShader(program, vs);
+                gl.attachShader(program, fs);
+                gl.linkProgram(program);
+                gl.useProgram(program);
+
+                const positionBuffer = gl.createBuffer();
+                gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+                gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+                    -1, -1, 1, -1, -1, 1,
+                    -1, 1, 1, -1, 1, 1
+                ]), gl.STATIC_DRAW);
+
+                const positionLocation = gl.getAttribLocation(program, "position");
+                gl.enableVertexAttribArray(positionLocation);
+                gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+                const timeLocation = gl.getUniformLocation(program, "u_time");
+                const resLocation = gl.getUniformLocation(program, "u_resolution");
+
+                function render(time) {
+                    gl.uniform1f(timeLocation, time * 0.001);
+                    gl.uniform2f(resLocation, canvas.width, canvas.height);
+                    gl.drawArrays(gl.TRIANGLES, 0, 6);
+                    requestAnimationFrame(render);
+                }
+                
+                requestAnimationFrame(render);
+            } else {
+                console.error("JODY HIGHROLLER SYSTEM ALERT: WebGL NOT SUPPORTED BY BROWSER!");
+            }
+        } else {
+            console.error("JODY HIGHROLLER SYSTEM ALERT: OCEAN CANVAS MISSING FROM DOM!");
+        }
+    </script>
+</body>
+</html>
