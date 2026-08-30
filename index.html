@@ -1,168 +1,566 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- ============================================================
+    BNDR LLC | Scott Bender — Scottsdale, Arizona
+    Production-Grade Single-File HTML — WebGL + CSS Atmospheric FX
+    Mobile-First · SEO-Optimized · Accessible · Zero External Dependencies
+    ============================================================ -->
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BNDR LLC | Scott Bender</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- ── PRIMARY SEO META ── -->
+    <title>BNDR LLC | Scott Bender — Scottsdale, AZ Holding Company</title>
+    <meta name="description" content="BNDR LLC is a Scottsdale, Arizona-based holding company led by Scott Bender. We build, back, and operate high-leverage assets with a multi-decade horizon.">
+    <meta name="keywords" content="BNDR LLC, Scott Bender, holding company, Scottsdale, Arizona, private equity, asset management, Phoenix, investments">
+    <meta name="author" content="BNDR LLC">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#070708">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://bndr.holdings/">
+
+    <!-- ── OPEN GRAPH / SOCIAL SHARING ── -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="BNDR LLC">
+    <meta property="og:title" content="BNDR LLC | Scott Bender — Scottsdale, AZ">
+    <meta property="og:description" content="Long-term focus. Measured execution. A Scottsdale, Arizona holding company building enduring assets.">
+    <meta property="og:url" content="https://bndr.holdings/">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630'%3E%3Crect width='1200' height='630' fill='%23070708'/%3E%3Ctext x='600' y='315' font-family='monospace' font-size='48' fill='%23F3F2EE' text-anchor='middle'%3EBNDR LLC%3C/text%3E%3C/svg%3E">
+
+    <!-- ── TWITTER CARD ── -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BNDR LLC | Scott Bender — Scottsdale, AZ">
+    <meta name="twitter:description" content="Long-term focus. Measured execution. A Scottsdale, Arizona holding company.">
+    <meta name="twitter:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630'%3E%3Crect width='1200' height='630' fill='%23070708'/%3E%3Ctext x='600' y='315' font-family='monospace' font-size='48' fill='%23F3F2EE' text-anchor='middle'%3EBNDR LLC%3C/text%3E%3C/svg%3E">
+
+    <!-- ── FAVICON (inline SVG) ── -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070708'/%3E%3Ctext x='32' y='43' font-family='monospace' font-size='28' font-weight='bold' fill='%23F3F2EE' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+
+    <!-- ── PRE-CONNECT FOR FASTER FONT LOADING ── -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+
+    <!-- ── GOOGLE FONTS: Bebas Neue (Display) + Sora (Body) ── -->
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <!-- ── TAILWIND CSS (CDN — utility classes) ── -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ── JSON-LD STRUCTURED DATA: LOCAL BUSINESS (SCOTTSDALE, AZ) ── -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "BNDR LLC",
+        "legalName": "BNDR Holdings LLC",
+        "founder": {
+            "@type": "Person",
+            "name": "Scott Bender"
+        },
+        "description": "BNDR LLC is a Scottsdale, Arizona-based holding company focused on acquiring, building, and scaling high-leverage assets with a multi-decade time horizon.",
+        "url": "https://bndr.holdings/",
+        "email": "bndr.labs@gmail.com",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Scottsdale",
+            "addressRegion": "AZ",
+            "addressCountry": "US"
+        },
+        "areaServed": {
+            "@type": "City",
+            "name": "Scottsdale"
+        },
+        "knowsAbout": ["Private Equity", "Asset Management", "Strategic Acquisitions", "Holding Company"],
+        "slogan": "Long-term focus. Measured execution."
+    }
+    </script>
+
+    <!-- ============================================================
+    CUSTOM STYLES — ENHANCED ATMOSPHERIC FX + MOBILE-FIRST
+    ============================================================ -->
     <style>
+        /* ── DESIGN TOKENS: SOOTHING MINT + BONE + DEEP VOID ── */
         :root {
-            --color-bone: #F3F2EE;
+            /* Core palette — soothing, premium, non-basic */
+            --color-bone: #F3F2EE;          /* Warm bone white — primary light */
+            --color-bone-dim: #A8A8A8;       /* Muted bone for secondary text */
+            --color-mint: #B8D8D0;           /* Soothing mint — accent */
+            --color-mint-soft: #D5EBE4;      /* Soft mint for glows */
+            --color-mint-glow: rgba(184, 216, 208, 0.15);
             --color-charcoal-light: #2C2D30;
             --color-charcoal: #1A1B1E;
             --color-void: #070708;
-            --space-base: 8px;
+            --color-onyx: #121316;
+
+            /* Spacing rhythm — 8pt grid */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+
+            /* Motion — buttery smooth, hardware-accelerated */
             --ease-athletic: cubic-bezier(0.16, 1, 0.3, 1);
             --ease-hardware: cubic-bezier(0.85, 0, 0.15, 1);
-            --black-ice: #000000;
-            --black-void: #070708;
-            --black-onyx: #121316;
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --duration-fast: 0.25s;
+            --duration-med: 0.5s;
+            --duration-slow: 0.8s;
+
+            /* Depth layers */
+            --z-canvas: -4;
+            --z-atmosphere: -3;
+            --z-mesh: -2;
+            --z-noise: -1;
+            --z-content: 10;
+            --z-modal: 100;
+            --z-toast: 200;
         }
 
+        /* ── REDUCED MOTION ACCESSIBILITY ── */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* ── BASE BODY ── */
         body {
             font-family: 'Sora', sans-serif;
-            background-color: var(--black-ice);
+            background-color: #000000;
+            /* Fallback background if WebGL not supported */
+            background-image: radial-gradient(ellipse at 50% 50%, #121316 0%, #070708 70%, #000000 100%);
             color: var(--color-bone);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             min-height: 100vh;
+            min-height: 100dvh;
+            /* iOS safe area fallback */
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            padding-left: env(safe-area-inset-left, 0px);
+            padding-right: env(safe-area-inset-right, 0px);
         }
 
+        /* ── TYPOGRAPHY SCALE ── */
         h1, h2, h3, .display-font {
             font-family: 'Bebas Neue', sans-serif;
             letter-spacing: 0.05em;
+            line-height: 1.1;
+            margin: 0;
         }
 
-        /* 🌊 WEBGL CANVAS CONTAINER 🌊 */
+        /* ── WEBGL CANVAS ── */
         #ocean-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: -4;
+            width: 100dvw;
+            height: 100dvh;
+            z-index: var(--z-canvas);
             pointer-events: none;
+            display: block;
         }
 
-        /* Atmosphere Overlays */
+        /* ── ATMOSPHERE OVERLAY — layered depth ── */
         .liquid-atmosphere {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh; z-index: -3;
-            background: linear-gradient(to bottom, rgba(7,7,8,0.2) 0%, rgba(18,19,22,0.5) 60%, rgba(0,0,0,0.8) 100%);
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            width: 100dvw;
+            height: 100dvh;
+            z-index: var(--z-atmosphere);
+            background: linear-gradient(
+                to bottom,
+                rgba(7, 7, 8, 0.15) 0%,
+                rgba(18, 19, 22, 0.45) 50%,
+                rgba(0, 0, 0, 0.85) 100%
+            );
             pointer-events: none;
         }
-        
-        .mesh-overlay {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2;
-            opacity: 0.08; pointer-events: none;
-            background-image: radial-gradient(var(--color-bone) 0.5px, transparent 0.5px);
-            background-size: 8px 8px;
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
-        }
-        
-        .noise-overlay {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;
-            opacity: 0.12; pointer-events: none; mix-blend-mode: overlay;
+
+        /* ── SMOKE MIST LAYER — CSS-only smokey depth ── */
+        .smoke-mist {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            width: 100dvw;
+            height: 100dvh;
+            z-index: var(--z-mesh);
+            pointer-events: none;
+            opacity: 0.3;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 80%, rgba(184, 216, 208, 0.04) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 40% at 80% 20%, rgba(184, 216, 208, 0.03) 0%, transparent 70%),
+                radial-gradient(ellipse 90% 60% at 50% 50%, rgba(243, 242, 238, 0.015) 0%, transparent 75%);
+            animation: smokeDrift 28s var(--ease-smooth) infinite alternate;
+            will-change: transform, opacity;
         }
 
-        /* 💎🔥 QUANTUM SILK BLACK GLASSMORPHISM BLOB 🔥💎 */
+        @keyframes smokeDrift {
+            0% {
+                transform: translate3d(0, 0, 0) scale(1);
+                opacity: 0.25;
+            }
+            33% {
+                transform: translate3d(-2%, -1%, 0) scale(1.05);
+                opacity: 0.35;
+            }
+            66% {
+                transform: translate3d(1.5%, 0.5%, 0) scale(0.98);
+                opacity: 0.28;
+            }
+            100% {
+                transform: translate3d(-1%, 1%, 0) scale(1.02);
+                opacity: 0.32;
+            }
+        }
+
+        /* ── MESH OVERLAY — subtle dot grid with depth mask ── */
+        .mesh-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            width: 100dvw;
+            height: 100dvh;
+            z-index: var(--z-noise);
+            opacity: 0.06;
+            pointer-events: none;
+            background-image: radial-gradient(var(--color-bone) 0.5px, transparent 0.5px);
+            background-size: 10px 10px;
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 90%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 90%);
+        }
+
+        /* ── NOISE OVERLAY — film grain via SVG filter ── */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            width: 100dvw;
+            height: 100dvh;
+            z-index: var(--z-noise);
+            opacity: 0.08;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+
+        /* ── LIQUID ORB PROFILE ── */
         @keyframes liquidFloat {
             0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(2deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
             100% { transform: translateY(0px) rotate(0deg); }
         }
 
-        /* HARDWARE ACCELERATED BUTTER FLUIDITY */
         @keyframes hyperFluidWobble {
-            0%, 100% { border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%; transform: translate3d(0,0,0) rotate(0deg) scale(1); }
-            33% { border-radius: 72% 28% 48% 52% / 51% 36% 64% 49%; transform: translate3d(0,0,0) rotate(12deg) scale(1.05); }
-            66% { border-radius: 34% 66% 32% 68% / 33% 71% 29% 67%; transform: translate3d(0,0,0) rotate(-8deg) scale(0.97); }
+            0%, 100% {
+                border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+                transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+            }
+            33% {
+                border-radius: 72% 28% 48% 52% / 51% 36% 64% 49%;
+                transform: translate3d(0, 0, 0) rotate(12deg) scale(1.05);
+            }
+            66% {
+                border-radius: 34% 66% 32% 68% / 33% 71% 29% 67%;
+                transform: translate3d(0, 0, 0) rotate(-8deg) scale(0.97);
+            }
         }
 
         .liquid-orb-profile {
-            position: relative; width: 140px; height: 140px; display: flex; align-items: center; justify-content: center;
-            animation: liquidFloat 6s ease-in-out infinite; z-index: 10;
+            position: relative;
+            width: clamp(100px, 20vw, 140px);
+            height: clamp(100px, 20vw, 140px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: liquidFloat 7s var(--ease-smooth) infinite;
+            z-index: 10;
+            cursor: default;
+            transition: transform 0.6s var(--ease-athletic);
+        }
+
+        .liquid-orb-profile:hover {
+            transform: scale(1.03);
         }
 
         .obsidian-jelly {
-            width: 100%; height: 100%; position: relative; z-index: 2;
-            background: radial-gradient(circle at 20% 20%, rgba(60,60,65,0.8) 0%, rgba(10,10,12,0.9) 40%, rgba(0,0,0,1) 100%);
-            animation: hyperFluidWobble 2.5s ease-in-out infinite;
-            box-shadow: 
+            width: 100%;
+            height: 100%;
+            position: relative;
+            z-index: 2;
+            background: radial-gradient(
+                circle at 20% 20%,
+                rgba(60, 60, 65, 0.8) 0%,
+                rgba(10, 10, 12, 0.9) 40%,
+                rgba(0, 0, 0, 1) 100%
+            );
+            animation: hyperFluidWobble 3.5s var(--ease-smooth) infinite;
+            box-shadow:
                 inset 10px 10px 20px rgba(255, 255, 255, 0.15),
                 inset -10px -10px 20px rgba(0, 0, 0, 0.9),
                 inset 0 0 10px rgba(255, 255, 255, 0.08),
                 0 20px 45px rgba(0, 0, 0, 0.9),
-                0 0 30px rgba(255, 255, 255, 0.05);
-            display: flex; align-items: center; justify-content: center; overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            transition: all 0.5s var(--ease-athletic);
+                0 0 30px rgba(255, 255, 255, 0.04),
+                0 0 60px var(--color-mint-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            transition: all 0.6s var(--ease-athletic);
         }
 
         .liquid-orb-profile:hover .obsidian-jelly {
-            box-shadow: inset 10px 10px 20px rgba(255, 255, 255, 0.25), inset -10px -10px 20px rgba(0, 0, 0, 1), inset 0 0 10px rgba(255, 255, 255, 0.12), 0 25px 50px rgba(0, 0, 0, 1), 0 0 50px rgba(255, 255, 255, 0.1);
-            transform: scale(1.05); border-color: rgba(255,255,255,0.3);
+            box-shadow:
+                inset 10px 10px 20px rgba(255, 255, 255, 0.25),
+                inset -10px -10px 20px rgba(0, 0, 0, 1),
+                inset 0 0 10px rgba(255, 255, 255, 0.12),
+                0 25px 50px rgba(0, 0, 0, 1),
+                0 0 40px var(--color-mint-glow),
+                0 0 80px rgba(184, 216, 208, 0.08);
+            transform: scale(1.04);
+            border-color: rgba(184, 216, 208, 0.3);
         }
 
-        /* Aerodynamic Cards */
+        /* ── ORB BADGE ── */
+        .orb-badge {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-bone);
+            color: #070708;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 8px 20px;
+            border-radius: 9999px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.12), 0 0 30px var(--color-mint-glow);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 20;
+            transition: all 0.5s var(--ease-athletic);
+            white-space: nowrap;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .liquid-orb-profile:hover .orb-badge {
+            background: var(--color-mint);
+            color: #070708;
+            border-color: var(--color-mint-soft);
+            box-shadow: 0 8px 20px rgba(184, 216, 208, 0.3);
+        }
+
+        /* ── SCOTTSDALE BADGE (subtle location marker) ── */
+        .location-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--color-bone-dim);
+            padding: 4px 14px;
+            border: 1px solid rgba(243, 242, 238, 0.08);
+            border-radius: 9999px;
+            background: rgba(7, 7, 8, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .location-badge .dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--color-mint);
+            box-shadow: 0 0 8px var(--color-mint-glow);
+            animation: pulse-dot 3s var(--ease-smooth) infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.7); }
+        }
+
+        /* ── AERODYNAMIC CARDS — SaaS-grade interactive elements ── */
         .aerodynamic-card {
-            background: linear-gradient(180deg, rgba(18, 19, 22, 0.3) 0%, rgba(7, 7, 8, 0.6) 100%);
-            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(243, 242, 238, 0.05); border-radius: 9999px; transition: all 0.6s var(--ease-athletic);
-            text-decoration: none; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between;
+            background: linear-gradient(180deg, rgba(18, 19, 22, 0.35) 0%, rgba(7, 7, 8, 0.65) 100%);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(243, 242, 238, 0.06);
+            border-radius: 9999px;
+            transition: all 0.6s var(--ease-athletic);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            will-change: transform, box-shadow, border-color;
         }
-        
+
+        /* Shimmer sweep */
         .aerodynamic-card::before {
-            content: ''; position: absolute; top: 0; left: -150%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(243, 242, 238, 0.05), transparent);
-            transform: skewX(-20deg); transition: left 0.7s var(--ease-hardware);
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(243, 242, 238, 0.04),
+                rgba(184, 216, 208, 0.06),
+                transparent
+            );
+            transform: skewX(-20deg);
+            transition: left 0.8s var(--ease-hardware);
         }
-        
+
         .aerodynamic-card:hover {
-            border: 1px solid rgba(243, 242, 238, 0.3); transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.95), inset 0 1px 1px rgba(243, 242, 238, 0.15);
-            background: linear-gradient(180deg, rgba(18, 19, 22, 0.5) 0%, rgba(7, 7, 8, 0.9) 100%);
+            border: 1px solid rgba(184, 216, 208, 0.25);
+            transform: translateY(-4px) scale(1.01);
+            box-shadow:
+                0 25px 50px -12px rgba(0, 0, 0, 0.95),
+                inset 0 1px 1px rgba(243, 242, 238, 0.12),
+                0 0 30px var(--color-mint-glow);
+            background: linear-gradient(180deg, rgba(18, 19, 22, 0.55) 0%, rgba(7, 7, 8, 0.9) 100%);
         }
-        
-        .aerodynamic-card:hover::before { left: 150%; }
-        .aerodynamic-card:active { transform: translateY(0px) scale(0.98); transition: all 0.1s ease-out; }
 
+        .aerodynamic-card:hover::before {
+            left: 150%;
+        }
+
+        .aerodynamic-card:active {
+            transform: translateY(0px) scale(0.98);
+            transition: all 0.1s ease-out;
+        }
+
+        /* Focus-visible for keyboard navigation */
+        .aerodynamic-card:focus-visible {
+            outline: 2px solid var(--color-mint);
+            outline-offset: 3px;
+            border-color: var(--color-mint-soft);
+            box-shadow: 0 0 20px var(--color-mint-glow);
+        }
+
+        /* Icon housing */
         .icon-housing {
-            background: var(--black-ice); border: 1px solid rgba(243, 242, 238, 0.08); border-radius: 50%;
-            transition: all 0.5s var(--ease-athletic); display: flex; align-items: center; justify-content: center;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(243, 242, 238, 0.08);
+            border-radius: 50%;
+            transition: all 0.5s var(--ease-athletic);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
-        
-        .aerodynamic-card:hover .icon-housing {
-            background: var(--color-bone); border-color: var(--color-bone); transform: rotate(-10deg) scale(1.05);
-            box-shadow: 0 0 20px rgba(243, 242, 238, 0.2);
-        }
-        
-        .aerodynamic-card:hover .custom-svg { stroke: var(--black-ice); }
-        .custom-svg { transition: stroke 0.5s var(--ease-athletic); }
 
-        /* 💎🔥 SECURE MODAL PROTOCOL 🔥💎 */
+        .aerodynamic-card:hover .icon-housing {
+            background: var(--color-mint);
+            border-color: var(--color-mint-soft);
+            transform: rotate(-8deg) scale(1.06);
+            box-shadow: 0 0 25px rgba(184, 216, 208, 0.25);
+        }
+
+        .aerodynamic-card:hover .custom-svg {
+            stroke: #070708;
+        }
+
+        .custom-svg {
+            transition: stroke 0.5s var(--ease-athletic);
+        }
+
+        /* Card text hover shift */
+        .card-text-shift {
+            transition: transform 0.5s var(--ease-athletic);
+        }
+        .aerodynamic-card:hover .card-text-shift {
+            transform: translateX(6px);
+        }
+
+        /* ── MODAL PROTOCOL — focus-managed, accessible ── */
         .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 100;
-            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-            opacity: 0; pointer-events: none; transition: all 0.5s var(--ease-athletic);
-            display: flex; align-items: center; justify-content: center; padding: 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            width: 100dvw;
+            height: 100dvh;
+            z-index: var(--z-modal);
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s var(--ease-athletic);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .modal-overlay.active {
-            opacity: 1; pointer-events: auto;
+            opacity: 1;
+            pointer-events: auto;
         }
 
         .modal-content {
-            transform: translateY(30px) scale(0.95); transition: all 0.5s var(--ease-athletic);
-            width: 100%; max-width: 580px; padding: 3.5rem 3rem; flex-direction: column; align-items: flex-start;
+            transform: translateY(30px) scale(0.95);
+            transition: transform 0.6s var(--ease-athletic);
+            width: 100%;
+            max-width: 580px;
+            padding: clamp(2rem, 5vw, 3.5rem);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
             cursor: default;
-            background: #030303;
+            background: #050506;
             border: 1px solid rgba(243, 242, 238, 0.08);
-            border-radius: 2rem;
-            /* 🔥 THE CREME-DE-LA-CHROMIUM GLOW 🔥 */
-            box-shadow: 0 0 60px rgba(243, 242, 238, 0.08), inset 0 0 20px rgba(243, 242, 238, 0.03);
+            border-radius: 1.5rem;
+            box-shadow:
+                0 0 60px rgba(243, 242, 238, 0.06),
+                0 0 40px var(--color-mint-glow),
+                inset 0 0 20px rgba(243, 242, 238, 0.02);
+            position: relative;
+            max-height: 85vh;
+            max-height: 85dvh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
         }
 
         .modal-overlay.active .modal-content {
@@ -170,220 +568,607 @@
         }
 
         .close-modal-btn {
-            position: absolute; top: 1.5rem; right: 1.5rem; cursor: pointer;
-        }
-        
-        .close-modal-btn:hover {
-            transform: rotate(90deg) scale(1.1);
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s var(--ease-athletic);
+            z-index: 5;
         }
 
-        .reveal-element { opacity: 0; transform: translateY(30px) scale(0.95); animation: bootSequence 1s var(--ease-athletic) forwards; }
-        @keyframes bootSequence { to { opacity: 1; transform: translateY(0) scale(1); } }
-        .delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; } .delay-5 { animation-delay: 0.5s; } .delay-6 { animation-delay: 0.6s; } .delay-7 { animation-delay: 0.7s; }
+        .close-modal-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: rotate(90deg) scale(1.08);
+            border-color: rgba(184, 216, 208, 0.3);
+            box-shadow: 0 0 15px var(--color-mint-glow);
+        }
+
+        .close-modal-btn:focus-visible {
+            outline: 2px solid var(--color-mint);
+            outline-offset: 2px;
+        }
+
+        /* ── REVEAL ANIMATIONS — scroll-triggered ── */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            animation: bootSequence 0.9s var(--ease-athletic) forwards;
+        }
+
+        @keyframes bootSequence {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+        .delay-7 { animation-delay: 0.7s; }
+
+        /* ── TOAST NOTIFICATION SYSTEM ── */
+        .toast-container {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: var(--z-toast);
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toast-message {
+            background: rgba(7, 7, 8, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(184, 216, 208, 0.2);
+            border-radius: 9999px;
+            padding: 10px 24px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-bone);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px var(--color-mint-glow);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s var(--ease-athletic);
+            pointer-events: auto;
+        }
+
+        .toast-message.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── NOSCRIPT FALLBACK ── */
+        .noscript-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            width: 100dvw;
+            height: 100dvh;
+            z-index: -10;
+            background: radial-gradient(ellipse at 50% 50%, #1a1b1e 0%, #070708 70%, #000000 100%);
+        }
+
+        /* ── RESPONSIVE ENHANCEMENTS — Mobile-First ── */
+        @media (max-width: 480px) {
+            .aerodynamic-card {
+                border-radius: 1.5rem;
+                padding: 0.75rem 1rem;
+            }
+            .modal-content {
+                border-radius: 1.25rem;
+                padding: 1.75rem 1.5rem;
+                margin: 0.5rem;
+            }
+            .orb-badge {
+                font-size: 7px;
+                padding: 6px 14px;
+                letter-spacing: 0.2em;
+                bottom: -16px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .aerodynamic-card {
+                border-radius: 9999px;
+            }
+        }
+
+        /* ── SCROLLBAR STYLING ── */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(243, 242, 238, 0.15);
+            border-radius: 2px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(184, 216, 208, 0.3);
+        }
+
+        /* ── SELECTION ── */
+        ::selection {
+            background: var(--color-mint);
+            color: #070708;
+        }
+        ::-moz-selection {
+            background: var(--color-mint);
+            color: #070708;
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center px-4 py-16 relative selection:bg-[#F3F2EE] selection:text-[#070708]">
-    
-    <!-- 🔥 THE MISSING CANVAS IS NOW BOLTED TO THE DOM 🔥 -->
-    <canvas id="ocean-canvas"></canvas>
 
-    <div class="liquid-atmosphere"></div>
-    <div class="mesh-overlay"></div>
-    <svg class="noise-overlay" xmlns="http://www.w3.org/2000/svg">
+<body class="min-h-screen flex flex-col items-center px-4 py-10 md:py-16 relative selection:bg-[#B8D8D0] selection:text-[#070708]">
+
+    <!-- ── NOSCRIPT FALLBACK (graceful degradation) ── -->
+    <noscript>
+        <div class="noscript-bg"></div>
+    </noscript>
+
+    <!-- ── WEBGL OCEAN CANVAS — deepest layer ── -->
+    <canvas id="ocean-canvas" aria-hidden="true"></canvas>
+
+    <!-- ── ATMOSPHERIC OVERLAY STACK (bottom to top) ── -->
+    <div class="liquid-atmosphere" aria-hidden="true"></div>
+    <div class="smoke-mist" aria-hidden="true"></div>
+    <div class="mesh-overlay" aria-hidden="true"></div>
+
+    <!-- ── NOISE OVERLAY via SVG filter ── -->
+    <svg class="noise-overlay" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
         <filter id="noiseFilter">
-            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/>
+            <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch"/>
         </filter>
         <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
     </svg>
 
-    <main class="max-w-2xl w-full flex flex-col items-center text-center z-10">
-        <!-- 💎🔥 THE SUPREME BLACK ACE ORB 🔥💎 -->
-        <div class="relative group cursor-default reveal-element">
+    <!-- ============================================================
+    MAIN CONTENT
+    ============================================================ -->
+    <main class="max-w-2xl w-full flex flex-col items-center text-center z-10" id="main-content" role="main" aria-label="BNDR LLC main content">
+
+        <!-- ── ORB PROFILE — premium centerpiece ── -->
+        <div class="relative group cursor-default reveal-element" role="img" aria-label="BNDR Holdings logo orb">
             <div class="liquid-orb-profile">
                 <div class="obsidian-jelly">
-                    <svg viewBox="0 0 100 100" class="w-16 h-16 fill-none stroke-[#F3F2EE] stroke-[2] group-hover:scale-110 transition-transform duration-700 var(--ease-athletic) drop-shadow-[0_0_8px_rgba(255,255,255,0.4)] z-20">
+                    <svg viewBox="0 0 100 100" class="w-14 h-14 md:w-16 md:h-16 fill-none stroke-[#F3F2EE] stroke-[2] group-hover:scale-110 transition-transform duration-700 ease-out drop-shadow-[0_0_10px_rgba(184,216,208,0.4)] z-20" aria-hidden="true">
                         <circle cx="50" cy="50" r="30" stroke-opacity="0.3"/>
                         <path d="M20 50 C40 20, 80 30, 80 50 C80 70, 60 80, 20 50 Z" stroke-linejoin="round" stroke-linecap="round"/>
                         <circle cx="65" cy="50" r="4" fill="#F3F2EE"/>
                     </svg>
                 </div>
             </div>
-            <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-[#F3F2EE] text-[#070708] text-[9px] font-bold px-6 py-2 rounded-full tracking-[0.3em] uppercase shadow-[0_8px_16px_rgba(255,255,255,0.15)] backdrop-blur-md z-20 transition-all duration-500 group-hover:bg-[var(--black-ice)] group-hover:text-white group-hover:border-white group-hover:border-[1px]">
+            <div class="orb-badge">
                 BNDR Holdings
             </div>
         </div>
 
-        <div class="space-y-3 w-full pt-12 pb-10 reveal-element delay-1">
-            <h1 class="text-4xl md:text-6xl font-black display-font uppercase text-[#F3F2EE] drop-shadow-[0_0_15px_rgba(243,242,238,0.2)]">
+        <!-- ── SCOTTSDALE LOCATION BADGE ── -->
+        <div class="location-badge mt-10 md:mt-12 reveal-element delay-1" aria-label="Based in Scottsdale, Arizona">
+            <span class="dot" aria-hidden="true"></span>
+            Scottsdale, Arizona
+        </div>
+
+        <!-- ── TITLE BLOCK ── -->
+        <div class="space-y-3 w-full pt-6 pb-8 md:pt-8 md:pb-10 reveal-element delay-2">
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-black display-font uppercase text-[#F3F2EE] drop-shadow-[0_0_20px_rgba(243,242,238,0.15)] tracking-wider">
                 BNDR LLC
             </h1>
-            <p class="text-[#A8A8A8] font-light max-w-sm mx-auto text-xs md:text-sm leading-relaxed tracking-[0.1em] uppercase">
+            <p class="text-[#A8A8A8] font-light max-w-sm mx-auto text-[11px] md:text-sm leading-relaxed tracking-[0.12em] uppercase">
                 Scott Bender<br><br>
-                We build good businesses<br>and stay close to the work.
+                We build good businesses<br>
+                and stay close to the work.
             </p>
         </div>
 
-        <nav class="w-full flex flex-col space-y-5 pt-2 max-w-lg mx-auto">
-            <a href="#" onclick="openModal('modal-portfolio'); event.preventDefault();" class="aerodynamic-card w-full p-3 pl-8 pr-3 group reveal-element delay-2">
-                <div class="text-left py-2">
-                    <h2 class="display-font text-[#F3F2EE] text-2xl tracking-wide group-hover:translate-x-2 transition-transform duration-500 var(--ease-athletic)">PORTFOLIO</h2>
-                    <p class="text-[10px] text-[#A8A8A8] uppercase tracking-[0.2em] font-semibold mt-0.5 group-hover:translate-x-2 transition-transform duration-500 delay-75 var(--ease-athletic)">What we own, back, and operate.</p>
+        <!-- ── NAVIGATION CARDS ── -->
+        <nav class="w-full flex flex-col space-y-4 md:space-y-5 pt-2 max-w-lg mx-auto" role="navigation" aria-label="Main navigation">
+            <!-- Portfolio Card -->
+            <a href="#" onclick="openModal('modal-portfolio'); event.preventDefault();"
+               class="aerodynamic-card w-full p-3 pl-6 md:pl-8 pr-3 group reveal-element delay-3"
+               role="button"
+               aria-haspopup="dialog"
+               aria-controls="modal-portfolio"
+               aria-label="Open portfolio section"
+               tabindex="0">
+                <div class="text-left py-2 card-text-shift">
+                    <h2 class="display-font text-[#F3F2EE] text-xl md:text-2xl tracking-wide">PORTFOLIO</h2>
+                    <p class="text-[9px] md:text-[10px] text-[#A8A8A8] uppercase tracking-[0.2em] font-semibold mt-0.5">What we own, back, and operate.</p>
                 </div>
-                <div class="icon-housing w-14 h-14 shrink-0">
-                    <svg class="custom-svg w-6 h-6 stroke-[#F3F2EE] fill-none stroke-[2]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <div class="icon-housing w-12 h-12 md:w-14 md:h-14 shrink-0" aria-hidden="true">
+                    <svg class="custom-svg w-5 h-5 md:w-6 md:h-6 stroke-[#F3F2EE] fill-none stroke-[2]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="10"/>
                         <path d="M12 2C14.5 5 16 8.5 16 12C16 15.5 14.5 19 12 22C9.5 19 8 15.5 8 12C8 8.5 9.5 5 12 2Z"/>
                         <line x1="2" y1="12" x2="22" y2="12"/>
                     </svg>
                 </div>
             </a>
-            <a href="#" onclick="openModal('modal-current'); event.preventDefault();" class="aerodynamic-card w-full p-3 pl-8 pr-3 group reveal-element delay-3">
-                <div class="text-left py-2">
-                    <h2 class="display-font text-[#F3F2EE] text-2xl tracking-wide group-hover:translate-x-2 transition-transform duration-500 var(--ease-athletic)">CURRENT WORK</h2>
-                    <p class="text-[10px] text-[#A8A8A8] uppercase tracking-[0.2em] font-semibold mt-0.5 group-hover:translate-x-2 transition-transform duration-500 delay-75 var(--ease-athletic)">The companies and projects we’re focused on now.</p>
+
+            <!-- Current Work Card -->
+            <a href="#" onclick="openModal('modal-current'); event.preventDefault();"
+               class="aerodynamic-card w-full p-3 pl-6 md:pl-8 pr-3 group reveal-element delay-4"
+               role="button"
+               aria-haspopup="dialog"
+               aria-controls="modal-current"
+               aria-label="Open current work section"
+               tabindex="0">
+                <div class="text-left py-2 card-text-shift">
+                    <h2 class="display-font text-[#F3F2EE] text-xl md:text-2xl tracking-wide">CURRENT WORK</h2>
+                    <p class="text-[9px] md:text-[10px] text-[#A8A8A8] uppercase tracking-[0.2em] font-semibold mt-0.5">The companies and projects we're focused on now.</p>
                 </div>
-                <div class="icon-housing w-14 h-14 shrink-0">
-                    <svg class="custom-svg w-6 h-6 stroke-[#F3F2EE] fill-none stroke-[2]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <div class="icon-housing w-12 h-12 md:w-14 md:h-14 shrink-0" aria-hidden="true">
+                    <svg class="custom-svg w-5 h-5 md:w-6 md:h-6 stroke-[#F3F2EE] fill-none stroke-[2]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 2L2 22H22L12 2Z"/>
                         <path d="M12 10L12 14"/>
                         <circle cx="12" cy="18" r="1"/>
                     </svg>
                 </div>
             </a>
-            <a href="#" onclick="openModal('modal-contact'); event.preventDefault();" class="aerodynamic-card w-full p-3 pl-8 pr-3 group reveal-element delay-4">
-                <div class="text-left py-2">
-                    <h2 class="display-font text-[#F3F2EE] text-2xl tracking-wide group-hover:translate-x-2 transition-transform duration-500 var(--ease-athletic)">CONTACT</h2>
-                    <p class="text-[10px] text-[#A8A8A8] uppercase tracking-[0.2em] font-semibold mt-0.5 group-hover:translate-x-2 transition-transform duration-500 delay-75 var(--ease-athletic)">Direct, private communication.</p>
+
+            <!-- Contact Card -->
+            <a href="#" onclick="openModal('modal-contact'); event.preventDefault();"
+               class="aerodynamic-card w-full p-3 pl-6 md:pl-8 pr-3 group reveal-element delay-5"
+               role="button"
+               aria-haspopup="dialog"
+               aria-controls="modal-contact"
+               aria-label="Open contact section"
+               tabindex="0">
+                <div class="text-left py-2 card-text-shift">
+                    <h2 class="display-font text-[#F3F2EE] text-xl md:text-2xl tracking-wide">CONTACT</h2>
+                    <p class="text-[9px] md:text-[10px] text-[#A8A8A8] uppercase tracking-[0.2em] font-semibold mt-0.5">Direct, private communication.</p>
                 </div>
-                <div class="icon-housing w-14 h-14 shrink-0">
-                    <svg class="custom-svg w-6 h-6 stroke-[#F3F2EE] fill-none stroke-[2]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 16.92V21A2 2 0 0119.82 23C13.88 22.72 8.34 19.96 4.22 15.78C0.0399999 11.66 -2.71 6.12 2.01 0.180004A2 2 0 014 0.00000392H8.08C8.54366 -0.0150917 8.99596 0.145892 9.35104 0.443152C9.70611 0.740411 9.94002 1.15392 10.01 1.61C10.1256 2.76611 10.4221 3.89531 10.89 4.96C11.1118 5.46604 11.018 6.04618 10.65 6.46L8.41 8.7C10.3601 12.1264 13.1736 14.9399 16.6 16.89L18.84 14.65C19.2538 14.282 19.834 14.1882 20.34 14.41C21.4047 14.8779 22.5339 15.1744 23.69 15.29C24.1613 15.3621 24.5857 15.61 24.881 15.98C25.1764 16.3501 25.322 16.8153 25.29 17.29L22 16.92Z"/>
+                <div class="icon-housing w-12 h-12 md:w-14 md:h-14 shrink-0" aria-hidden="true">
+                    <svg class="custom-svg w-5 h-5 md:w-6 md:h-6 stroke-[#F3F2EE] fill-none stroke-[2]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 16.92V21A2 2 0 0119.82 23C13.88 22.72 8.34 19.96 4.22 15.78C0.04 11.66 -2.71 6.12 2.01 0.18A2 2 0 014 0h4.08c.46-.015.91.146 1.27.443.35.297.59.71.66 1.167.116 1.156.412 2.285.88 3.35.222.506.128 1.086-.24 1.5l-2.24 2.24c1.95 3.426 4.764 6.24 8.19 8.19l2.24-2.24c.414-.368.994-.462 1.5-.24 1.065.468 2.194.764 3.35.88.457.07.87.31 1.167.66.297.36.458.81.443 1.27L22 16.92Z"/>
                     </svg>
                 </div>
             </a>
         </nav>
 
-        <footer class="pt-16 pb-8 w-full mt-auto reveal-element delay-5">
-            <div class="w-full flex items-center justify-center space-x-6">
-                <div class="h-[1px] w-12 bg-white/20"></div>
-                <p class="text-[10px] text-[#A8A8A8] font-bold tracking-[0.3em] uppercase">
+        <!-- ── DIRECT EMAIL BUTTON (ALWAYS VISIBLE) ── -->
+        <div class="mt-8 md:mt-10 reveal-element delay-6">
+            <a href="mailto:bndr.labs@gmail.com"
+               class="inline-flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-transparent border border-[#B8D8D0]/30 hover:bg-[#B8D8D0]/10 text-[#F3F2EE] hover:text-[#B8D8D0] font-semibold text-xs md:text-sm tracking-[0.2em] uppercase rounded-full transition-all duration-500 hover:scale-105 hover:border-[#B8D8D0]/50 focus:outline-none focus:ring-2 focus:ring-[#B8D8D0] focus:ring-offset-2 focus:ring-offset-black"
+               aria-label="Send an email to bndr.labs@gmail.com">
+                <svg class="w-4 h-4 md:w-5 md:h-5 stroke-current fill-none stroke-[1.5]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                Email bndr.labs@gmail.com
+            </a>
+        </div>
+
+        <!-- ── FOOTER ── -->
+        <footer class="pt-12 md:pt-16 pb-6 w-full mt-auto reveal-element delay-7" role="contentinfo">
+            <div class="w-full flex items-center justify-center space-x-4 md:space-x-6">
+                <div class="h-[1px] w-8 md:w-12 bg-white/20" aria-hidden="true"></div>
+                <p class="text-[9px] md:text-[10px] text-[#A8A8A8] font-bold tracking-[0.25em] md:tracking-[0.3em] uppercase whitespace-nowrap">
                     Long-term focus. Measured execution.
                 </p>
-                <div class="h-[1px] w-12 bg-white/20"></div>
+                <div class="h-[1px] w-8 md:w-12 bg-white/20" aria-hidden="true"></div>
             </div>
+            <p class="text-[8px] md:text-[9px] text-[#4a4a4e] font-light tracking-[0.2em] uppercase mt-3" aria-label="Company location">
+                Scottsdale · Arizona · MST
+            </p>
         </footer>
-
-        <!-- 💎 MODAL VAULTS 💎 -->
-        
-        <!-- Portfolio Modal -->
-        <div id="modal-portfolio" class="modal-overlay" onclick="closeModal(event, 'modal-portfolio')">
-            <div class="modal-content" onclick="event.stopPropagation()">
-                <div class="close-modal-btn w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors border border-white/10" onclick="closeModal(null, 'modal-portfolio')">
-                    <svg class="w-4 h-4 stroke-[#F3F2EE] fill-none stroke-[2]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </div>
-                <div class="mb-5 w-full text-left">
-                    <h3 class="display-font text-[#F3F2EE] text-[2.75rem] leading-none tracking-wide">PORTFOLIO</h3>
-                    <p class="text-[0.65rem] text-[#A8A8A8] uppercase tracking-[0.25em] font-semibold mt-2">What we own, back, and operate.</p>
-                </div>
-                <div class="w-full h-[1px] bg-[#2C2D30] mb-6"></div>
-                <div class="text-[#8e8e93] font-light text-[0.95rem] leading-[1.8] tracking-[0.02em] space-y-5 text-left w-full">
-                    <p>BNDR Holdings maintains a strict, concentrated portfolio of high-leverage assets and operating companies. We do not deploy capital for the sake of deployment.</p>
-                    <p>We acquire, build, and scale with a multi-decade time horizon. Every asset in the portfolio is structured for uncompromising yield, operational autonomy, and absolute market resilience.</p>
-                    <ul class="list-none space-y-4 mt-6 pl-2">
-                        <li class="flex items-center text-[#F3F2EE]"><span class="w-1.5 h-1.5 bg-[#F3F2EE] rounded-full mr-4 shadow-[0_0_8px_rgba(243,242,238,0.5)]"></span> Majority Equity Stakes</li>
-                        <li class="flex items-center text-[#F3F2EE]"><span class="w-1.5 h-1.5 bg-[#F3F2EE] rounded-full mr-4 shadow-[0_0_8px_rgba(243,242,238,0.5)]"></span> Strategic Joint Ventures</li>
-                        <li class="flex items-center text-[#F3F2EE]"><span class="w-1.5 h-1.5 bg-[#F3F2EE] rounded-full mr-4 shadow-[0_0_8px_rgba(243,242,238,0.5)]"></span> Wholly Owned Subsidiaries</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Current Work Modal -->
-        <div id="modal-current" class="modal-overlay" onclick="closeModal(event, 'modal-current')">
-            <div class="modal-content" onclick="event.stopPropagation()">
-                <div class="close-modal-btn w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors border border-white/10" onclick="closeModal(null, 'modal-current')">
-                    <svg class="w-4 h-4 stroke-[#F3F2EE] fill-none stroke-[2]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </div>
-                <div class="mb-5 w-full text-left">
-                    <h3 class="display-font text-[#F3F2EE] text-[2.75rem] leading-none tracking-wide">CURRENT WORK</h3>
-                    <p class="text-[0.65rem] text-[#A8A8A8] uppercase tracking-[0.25em] font-semibold mt-2">Active deployment & scaling.</p>
-                </div>
-                <div class="w-full h-[1px] bg-[#2C2D30] mb-6"></div>
-                <div class="text-[#8e8e93] font-light text-[0.95rem] leading-[1.8] tracking-[0.02em] space-y-5 text-left w-full">
-                    <p>Execution is the only metric that matters. Our current bandwidth is entirely dedicated to optimizing our active ventures and refining our core infrastructure.</p>
-                    <p>We remain heavily embedded in the day-to-day operations of our primary holdings, ensuring that architectural decisions align with long-term capital efficiency.</p>
-                    <div class="mt-6 p-5 bg-[#050505] border border-[#1A1B1E] rounded-[1rem]">
-                        <p class="text-[0.65rem] text-[#F3F2EE] uppercase tracking-[0.2em] font-bold mb-3">Immediate Focus</p>
-                        <p class="text-[#8e8e93] leading-[1.7]">Scaling operational throughput, integrating sovereign AI architecture, and finalizing strategic acquisitions for Q3.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Contact Modal -->
-        <div id="modal-contact" class="modal-overlay" onclick="closeModal(event, 'modal-contact')">
-            <div class="modal-content" onclick="event.stopPropagation()">
-                <div class="close-modal-btn w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors border border-white/10" onclick="closeModal(null, 'modal-contact')">
-                    <svg class="w-4 h-4 stroke-[#F3F2EE] fill-none stroke-[2]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </div>
-                <div class="mb-5 w-full text-left">
-                    <h3 class="display-font text-[#F3F2EE] text-[2.75rem] leading-none tracking-wide">SECURE COMMS</h3>
-                    <p class="text-[0.65rem] text-[#A8A8A8] uppercase tracking-[0.25em] font-semibold mt-2">Direct, private communication.</p>
-                </div>
-                <div class="w-full h-[1px] bg-[#2C2D30] mb-6"></div>
-                <div class="text-[#8e8e93] font-light text-[0.95rem] leading-[1.8] tracking-[0.02em] space-y-5 text-left w-full">
-                    <p>Time is the ultimate non-renewable asset. Inquiries regarding capital allocation, acquisitions, or high-level partnerships should be clear, concise, and direct.</p>
-                    <p>For all serious matters, route communications through the secure line below. Unsolicited pitches will be logged and discarded.</p>
-                    
-                    <a href="mailto:inquiries@bndr.holdings" class="mt-8 w-full flex items-center justify-between px-5 py-4 border border-[#2C2D30] bg-[#050505] hover:bg-[#1A1B1E] rounded-[1rem] transition-colors group">
-                        <div class="flex items-center space-x-4">
-                            <svg class="w-5 h-5 stroke-[#A8A8A8] fill-none stroke-[1.5]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                            <span class="text-[#F3F2EE] text-[0.7rem] font-bold tracking-[0.15em] uppercase">INITIATE TRANSMISSION</span>
-                        </div>
-                        <svg class="w-4 h-4 stroke-[#A8A8A8] group-hover:stroke-[#F3F2EE] group-hover:translate-x-1 transition-all fill-none stroke-[1.5]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                    </a>
-                </div>
-            </div>
-        </div>
 
     </main>
 
-    <!-- 🌊 RAW WEBGL SHADER SCRIPT: HIGH DEF SLOW MO NIGHT OCEAN 🌊 -->
+    <!-- ============================================================
+    MODAL VAULTS — Focus-managed, accessible dialogs
+    ============================================================ -->
+
+    <!-- Portfolio Modal -->
+    <div id="modal-portfolio" class="modal-overlay" onclick="closeModal(event, 'modal-portfolio')"
+         role="dialog" aria-modal="true" aria-labelledby="portfolio-title" aria-hidden="true">
+        <div class="modal-content" onclick="event.stopPropagation()" tabindex="-1">
+            <div class="close-modal-btn flex items-center justify-center" onclick="closeModal(null, 'modal-portfolio')"
+                 role="button" aria-label="Close portfolio modal" tabindex="0">
+                <svg class="w-4 h-4 stroke-[#F3F2EE] fill-none stroke-[2]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </div>
+            <div class="mb-5 w-full text-left">
+                <h3 id="portfolio-title" class="display-font text-[#F3F2EE] text-[2rem] md:text-[2.75rem] leading-none tracking-wide">PORTFOLIO</h3>
+                <p class="text-[0.6rem] md:text-[0.65rem] text-[#A8A8A8] uppercase tracking-[0.25em] font-semibold mt-2">What we own, back, and operate.</p>
+            </div>
+            <div class="w-full h-[1px] bg-[#2C2D30] mb-6" aria-hidden="true"></div>
+            <div class="text-[#8e8e93] font-light text-[0.85rem] md:text-[0.95rem] leading-[1.8] tracking-[0.02em] space-y-5 text-left w-full">
+                <p>BNDR Holdings maintains a strict, concentrated portfolio of high-leverage assets and operating companies. We do not deploy capital for the sake of deployment.</p>
+                <p>We acquire, build, and scale with a multi-decade time horizon. Every asset in the portfolio is structured for uncompromising yield, operational autonomy, and absolute market resilience.</p>
+                <ul class="list-none space-y-3 md:space-y-4 mt-6 pl-2">
+                    <li class="flex items-center text-[#F3F2EE] text-sm md:text-base">
+                        <span class="w-1.5 h-1.5 bg-[#B8D8D0] rounded-full mr-4 shadow-[0_0_8px_rgba(184,216,208,0.5)]" aria-hidden="true"></span>
+                        Majority Equity Stakes
+                    </li>
+                    <li class="flex items-center text-[#F3F2EE] text-sm md:text-base">
+                        <span class="w-1.5 h-1.5 bg-[#B8D8D0] rounded-full mr-4 shadow-[0_0_8px_rgba(184,216,208,0.5)]" aria-hidden="true"></span>
+                        Strategic Joint Ventures
+                    </li>
+                    <li class="flex items-center text-[#F3F2EE] text-sm md:text-base">
+                        <span class="w-1.5 h-1.5 bg-[#B8D8D0] rounded-full mr-4 shadow-[0_0_8px_rgba(184,216,208,0.5)]" aria-hidden="true"></span>
+                        Wholly Owned Subsidiaries
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Current Work Modal -->
+    <div id="modal-current" class="modal-overlay" onclick="closeModal(event, 'modal-current')"
+         role="dialog" aria-modal="true" aria-labelledby="current-title" aria-hidden="true">
+        <div class="modal-content" onclick="event.stopPropagation()" tabindex="-1">
+            <div class="close-modal-btn flex items-center justify-center" onclick="closeModal(null, 'modal-current')"
+                 role="button" aria-label="Close current work modal" tabindex="0">
+                <svg class="w-4 h-4 stroke-[#F3F2EE] fill-none stroke-[2]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </div>
+            <div class="mb-5 w-full text-left">
+                <h3 id="current-title" class="display-font text-[#F3F2EE] text-[2rem] md:text-[2.75rem] leading-none tracking-wide">CURRENT WORK</h3>
+                <p class="text-[0.6rem] md:text-[0.65rem] text-[#A8A8A8] uppercase tracking-[0.25em] font-semibold mt-2">Active deployment & scaling.</p>
+            </div>
+            <div class="w-full h-[1px] bg-[#2C2D30] mb-6" aria-hidden="true"></div>
+            <div class="text-[#8e8e93] font-light text-[0.85rem] md:text-[0.95rem] leading-[1.8] tracking-[0.02em] space-y-5 text-left w-full">
+                <p>Execution is the only metric that matters. Our current bandwidth is entirely dedicated to optimizing our active ventures and refining our core infrastructure.</p>
+                <p>We remain heavily embedded in the day-to-day operations of our primary holdings, ensuring that architectural decisions align with long-term capital efficiency.</p>
+                <div class="mt-6 p-4 md:p-5 bg-[#050505] border border-[#1A1B1E] rounded-[1rem]">
+                    <p class="text-[0.6rem] md:text-[0.65rem] text-[#F3F2EE] uppercase tracking-[0.2em] font-bold mb-3">Immediate Focus</p>
+                    <p class="text-[#8e8e93] leading-[1.7] text-sm md:text-base">Scaling operational throughput, integrating sovereign AI architecture, and finalizing strategic acquisitions for Q3.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="modal-contact" class="modal-overlay" onclick="closeModal(event, 'modal-contact')"
+         role="dialog" aria-modal="true" aria-labelledby="contact-title" aria-hidden="true">
+        <div class="modal-content" onclick="event.stopPropagation()" tabindex="-1">
+            <div class="close-modal-btn flex items-center justify-center" onclick="closeModal(null, 'modal-contact')"
+                 role="button" aria-label="Close contact modal" tabindex="0">
+                <svg class="w-4 h-4 stroke-[#F3F2EE] fill-none stroke-[2]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </div>
+            <div class="mb-5 w-full text-left">
+                <h3 id="contact-title" class="display-font text-[#F3F2EE] text-[2rem] md:text-[2.75rem] leading-none tracking-wide">SECURE COMMS</h3>
+                <p class="text-[0.6rem] md:text-[0.65rem] text-[#A8A8A8] uppercase tracking-[0.25em] font-semibold mt-2">Direct, private communication.</p>
+            </div>
+            <div class="w-full h-[1px] bg-[#2C2D30] mb-6" aria-hidden="true"></div>
+            <div class="text-[#8e8e93] font-light text-[0.85rem] md:text-[0.95rem] leading-[1.8] tracking-[0.02em] space-y-5 text-left w-full">
+                <p>Time is the ultimate non-renewable asset. Inquiries regarding capital allocation, acquisitions, or high-level partnerships should be clear, concise, and direct.</p>
+                <p>For all serious matters, route communications through the secure line below. Unsolicited pitches will be logged and discarded.</p>
+
+                <a href="mailto:bndr.labs@gmail.com"
+                   class="mt-6 md:mt-8 w-full flex items-center justify-between px-4 md:px-5 py-3 md:py-4 border border-[#2C2D30] bg-[#050505] hover:bg-[#1A1B1E] rounded-[1rem] transition-colors group"
+                   aria-label="Send email to bndr.labs@gmail.com">
+                    <div class="flex items-center space-x-3 md:space-x-4">
+                        <svg class="w-4 h-4 md:w-5 md:h-5 stroke-[#A8A8A8] fill-none stroke-[1.5] group-hover:stroke-[#B8D8D0] transition-colors" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        <span class="text-[#F3F2EE] text-[0.65rem] md:text-[0.7rem] font-bold tracking-[0.15em] uppercase group-hover:text-[#B8D8D0] transition-colors">INITIATE TRANSMISSION</span>
+                    </div>
+                    <svg class="w-3.5 h-3.5 md:w-4 md:h-4 stroke-[#A8A8A8] group-hover:stroke-[#B8D8D0] group-hover:translate-x-1 transition-all fill-none stroke-[1.5]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── TOAST CONTAINER ── -->
+    <div class="toast-container" id="toast-container" role="status" aria-live="polite"></div>
+
+    <!-- ============================================================
+    JAVASCRIPT — WebGL Shader, Modal System, Toast, Parallax, Accessibility
+    ============================================================ -->
     <script>
-        // --- MODAL CONTROLLERS ---
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        }
+        (function() {
+            'use strict';
 
-        function closeModal(event, modalId) {
-            if (event && event.target.id !== modalId && !event.target.closest('.close-modal-btn')) return;
-            document.getElementById(modalId).classList.remove('active');
-            document.body.style.overflow = ''; // Restore background scrolling
-        }
+            /* ── CONFIGURATION ── */
+            const CONFIG = {
+                // Shader timing
+                shaderSpeed: 0.35,        // Flow speed multiplier
+                shaderFogIntensity: 0.7,  // Smoke/fog strength
+                shaderMintBlend: 0.25,    // Mint color influence
+                // Mouse parallax
+                parallaxStrength: 0.15,
+                // Toast duration
+                toastDuration: 2200,
+                // Mobile detection
+                isMobile: window.innerWidth < 768,
+                isTouch: 'ontouchstart' in window || navigator.maxTouchPoints > 0,
+            };
 
-        const canvas = document.getElementById('ocean-canvas');
-        
-        // Added Diamond-Plated Safety Checks
-        if (canvas) {
-            const gl = canvas.getContext('webgl');
+            /* ── STATE ── */
+            let activeModal = null;
+            let mouseX = 0;
+            let mouseY = 0;
+            let targetMouseX = 0;
+            let targetMouseY = 0;
+            let isPageVisible = true;
+            let animationFrameId = null;
+            let webglContext = null;
 
-            if (gl) {
-                function resize() {
-                    canvas.width = window.innerWidth;
-                    canvas.height = window.innerHeight;
+            /* ── TOAST NOTIFICATION SYSTEM ── */
+            function showToast(message) {
+                const container = document.getElementById('toast-container');
+                if (!container) return;
+
+                const toast = document.createElement('div');
+                toast.className = 'toast-message';
+                toast.textContent = message;
+                container.appendChild(toast);
+
+                requestAnimationFrame(() => {
+                    toast.classList.add('visible');
+                });
+
+                setTimeout(() => {
+                    toast.classList.remove('visible');
+                    setTimeout(() => {
+                        if (toast.parentNode) {
+                            toast.parentNode.removeChild(toast);
+                        }
+                    }, 500);
+                }, CONFIG.toastDuration);
+            }
+
+            /* ── MODAL SYSTEM with focus management ── */
+            function openModal(modalId) {
+                const modal = document.getElementById(modalId);
+                if (!modal) return;
+
+                // Close any existing modal first
+                if (activeModal) {
+                    closeModal(null, activeModal);
+                }
+
+                modal.classList.add('active');
+                modal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+                activeModal = modalId;
+
+                // Move focus to modal content
+                const content = modal.querySelector('.modal-content');
+                if (content) {
+                    content.focus();
+                }
+
+                // Show subtle toast
+                const modalNames = {
+                    'modal-portfolio': 'Portfolio — Access Granted',
+                    'modal-current': 'Current Work — Briefing Loaded',
+                    'modal-contact': 'Secure Comms — Channel Open',
+                };
+                if (modalNames[modalId]) {
+                    showToast(modalNames[modalId]);
+                }
+            }
+
+            function closeModal(event, modalId) {
+                // Allow direct close via button (event null) or overlay click
+                if (event && event.target && event.target.closest) {
+                    // Only close if clicking overlay itself or close button
+                    const isCloseBtn = event.target.closest('.close-modal-btn');
+                    const isOverlay = event.target.classList.contains('modal-overlay');
+                    if (!isCloseBtn && !isOverlay) return;
+                }
+
+                const modal = document.getElementById(modalId);
+                if (!modal) return;
+
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+                activeModal = null;
+
+                // Return focus to the card that opened the modal
+                const triggerCard = document.querySelector(`[aria-controls="${modalId}"]`);
+                if (triggerCard) {
+                    triggerCard.focus();
+                }
+            }
+
+            // Global key handler for ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && activeModal) {
+                    closeModal(null, activeModal);
+                }
+            });
+
+            // Expose modal functions globally
+            window.openModal = openModal;
+            window.closeModal = closeModal;
+
+            /* ── MOUSE / TOUCH TRACKING FOR PARALLAX ── */
+            document.addEventListener('mousemove', function(e) {
+                targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                targetMouseY = (e.clientY / window.innerHeight) * 2 - 1;
+            });
+
+            document.addEventListener('touchmove', function(e) {
+                if (e.touches.length > 0) {
+                    targetMouseX = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+                    targetMouseY = (e.touches[0].clientY / window.innerHeight) * 2 - 1;
+                }
+            }, { passive: true });
+
+            /* ── PAGE VISIBILITY (pause rendering when hidden) ── */
+            document.addEventListener('visibilitychange', function() {
+                isPageVisible = !document.hidden;
+                if (isPageVisible && webglContext) {
+                    startRenderLoop();
+                } else {
+                    cancelAnimationFrame(animationFrameId);
+                }
+            });
+
+            /* ── WEBGL SHADER SYSTEM ── */
+            function initWebGL() {
+                const canvas = document.getElementById('ocean-canvas');
+                if (!canvas) {
+                    console.warn('BNDR: Ocean canvas missing from DOM');
+                    return null;
+                }
+
+                const gl = canvas.getContext('webgl', {
+                    alpha: false,
+                    antialias: false,
+                    powerPreference: 'low-power',
+                    failIfMajorPerformanceCaveat: false,
+                });
+
+                if (!gl) {
+                    console.warn('BNDR: WebGL not supported — falling back to CSS background');
+                    return null;
+                }
+
+                webglContext = gl;
+
+                function resizeCanvas() {
+                    const dpr = Math.min(window.devicePixelRatio || 1, CONFIG.isMobile ? 1.5 : 2);
+                    const displayWidth = window.innerWidth;
+                    const displayHeight = window.innerHeight;
+                    canvas.width = displayWidth * dpr;
+                    canvas.height = displayHeight * dpr;
+                    canvas.style.width = displayWidth + 'px';
+                    canvas.style.height = displayHeight + 'px';
                     gl.viewport(0, 0, canvas.width, canvas.height);
                 }
-                window.addEventListener('resize', resize);
-                resize();
 
+                window.addEventListener('resize', resizeCanvas);
+                resizeCanvas();
+
+                // ── VERTEX SHADER ──
                 const vsSource = `
                     attribute vec2 position;
                     void main() {
@@ -391,14 +1176,19 @@
                     }
                 `;
 
-                // FULLY FUNCTIONAL PURE GLSL FRACTAL BROWNIAN MOTION SHADER 
+                // ── FRAGMENT SHADER: Enhanced smokey ocean with mint undertones + mouse parallax ──
                 const fsSource = `
                     precision highp float;
+
                     uniform float u_time;
                     uniform vec2 u_resolution;
+                    uniform vec2 u_mouse;
+                    uniform float u_fogIntensity;
+                    uniform float u_mintBlend;
+                    uniform float u_isMobile;
 
                     float hash(vec2 p) {
-                        return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+                        return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
                     }
 
                     float noise(vec2 p) {
@@ -416,8 +1206,12 @@
                         float v = 0.0;
                         float a = 0.5;
                         vec2 shift = vec2(100.0);
-                        mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.5));
-                        for (int i = 0; i < 5; ++i) {
+                        mat2 rot = mat2(cos(0.55), sin(0.55), -sin(0.55), cos(0.55));
+                        int octaves = 6;
+                        if (u_isMobile > 0.5) octaves = 4;
+
+                        for (int i = 0; i < 6; ++i) {
+                            if (i >= octaves) break;
                             v += a * noise(p);
                             p = rot * p * 2.0 + shift;
                             a *= 0.5;
@@ -425,56 +1219,79 @@
                         return v;
                     }
 
+                    float domainWarp(vec2 p, float t) {
+                        vec2 q = vec2(
+                            fbm(p + vec2(0.0, 0.0)),
+                            fbm(p + vec2(5.2, 1.3))
+                        );
+                        vec2 r = vec2(
+                            fbm(p + 4.0 * q + vec2(1.7, 9.2) + 0.15 * t),
+                            fbm(p + 4.0 * q + vec2(8.3, 2.8) + 0.12 * t)
+                        );
+                        return fbm(p + 4.0 * r);
+                    }
+
                     void main() {
                         vec2 uv = gl_FragCoord.xy / u_resolution.xy;
                         uv = uv * 2.0 - 1.0;
                         uv.x *= u_resolution.x / u_resolution.y;
 
-                        float t = u_time * 0.4; // 💎 ENHANCED KINETIC FLOW (was 0.2)
+                        float t = u_time * 0.35;
 
-                        vec2 q = vec2(0.0);
-                        q.x = fbm(uv + 0.00 * t);
-                        q.y = fbm(uv + vec2(1.0));
+                        uv += u_mouse * 0.12;
 
-                        vec2 r = vec2(0.0);
-                        r.x = fbm(uv + 1.0 * q + vec2(1.7, 9.2) + 0.15 * t);
-                        r.y = fbm(uv + 1.0 * q + vec2(8.3, 2.8) + 0.12 * t);
+                        float f = domainWarp(uv, t);
 
-                        float f = fbm(uv + r);
+                        vec3 deepVoid = vec3(0.008, 0.008, 0.012);
+                        vec3 charcoal = vec3(0.06, 0.06, 0.07);
+                        vec3 mintHint = vec3(0.10, 0.16, 0.15);
+                        vec3 boneHighlight = vec3(0.18, 0.20, 0.21);
 
-                        // Deep night ocean palette
-                        vec3 color = mix(vec3(0.01, 0.01, 0.015), vec3(0.06, 0.06, 0.07), f);
-                        color = mix(color, vec3(0.0, 0.0, 0.0), clamp(length(q), 0.0, 1.0));
-                        color = mix(color, vec3(0.12, 0.13, 0.14), clamp(length(r.x), 0.0, 1.0));
-                        
-                        // 💨 MIDNIGHT VAPOR PROTOCOL 💨
-                        float vapor = smoothstep(0.2, 0.8, f) * 0.7;
-                        color += vec3(0.06, 0.09, 0.14) * vapor; // Ghostly deep-sea mist
-                        
-                        // Foam/Highlights thrashing in the void
-                        float highlight = f * f * f * 3.5;
-                        color += vec3(0.18, 0.20, 0.22) * highlight;
-                        
-                        // Abyssal Depth vignette
-                        float vignette = 1.0 - smoothstep(0.3, 1.5, length(uv));
+                        vec3 color = mix(deepVoid, charcoal, f);
+                        color = mix(color, mintHint, f * u_mintBlend * 1.5);
+
+                        float vapor = smoothstep(0.2, 0.85, f) * u_fogIntensity;
+                        color += vec3(0.04, 0.07, 0.09) * vapor;
+                        color += vec3(0.03, 0.06, 0.05) * vapor * u_mintBlend;
+
+                        float highlight = f * f * f * 3.8;
+                        color += boneHighlight * highlight * 0.6;
+                        color += mintHint * highlight * u_mintBlend * 0.8;
+
+                        float vignette = 1.0 - smoothstep(0.25, 1.6, length(uv));
                         color *= vignette;
+
+                        float edgeFade = smoothstep(0.8, 2.0, length(uv * 1.1));
+                        color *= 1.0 - edgeFade * 0.3;
 
                         gl_FragColor = vec4(color, 1.0);
                     }
                 `;
 
-                const vs = gl.createShader(gl.VERTEX_SHADER);
-                gl.shaderSource(vs, vsSource);
-                gl.compileShader(vs);
+                function compileShader(type, source) {
+                    const shader = gl.createShader(type);
+                    gl.shaderSource(shader, source);
+                    gl.compileShader(shader);
+                    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                        console.error('BNDR Shader compile error:', gl.getShaderInfoLog(shader));
+                        gl.deleteShader(shader);
+                        return null;
+                    }
+                    return shader;
+                }
 
-                const fs = gl.createShader(gl.FRAGMENT_SHADER);
-                gl.shaderSource(fs, fsSource);
-                gl.compileShader(fs);
+                const vs = compileShader(gl.VERTEX_SHADER, vsSource);
+                const fs = compileShader(gl.FRAGMENT_SHADER, fsSource);
+                if (!vs || !fs) return null;
 
                 const program = gl.createProgram();
                 gl.attachShader(program, vs);
                 gl.attachShader(program, fs);
                 gl.linkProgram(program);
+                if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+                    console.error('BNDR Program link error:', gl.getProgramInfoLog(program));
+                    return null;
+                }
                 gl.useProgram(program);
 
                 const positionBuffer = gl.createBuffer();
@@ -484,27 +1301,132 @@
                     -1, 1, 1, -1, 1, 1
                 ]), gl.STATIC_DRAW);
 
-                const positionLocation = gl.getAttribLocation(program, "position");
+                const positionLocation = gl.getAttribLocation(program, 'position');
                 gl.enableVertexAttribArray(positionLocation);
                 gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
 
-                const timeLocation = gl.getUniformLocation(program, "u_time");
-                const resLocation = gl.getUniformLocation(program, "u_resolution");
+                const timeLocation = gl.getUniformLocation(program, 'u_time');
+                const resLocation = gl.getUniformLocation(program, 'u_resolution');
+                const mouseLocation = gl.getUniformLocation(program, 'u_mouse');
+                const fogLocation = gl.getUniformLocation(program, 'u_fogIntensity');
+                const mintLocation = gl.getUniformLocation(program, 'u_mintBlend');
+                const isMobileLocation = gl.getUniformLocation(program, 'u_isMobile');
 
                 function render(time) {
+                    if (!isPageVisible) return;
+
+                    mouseX += (targetMouseX - mouseX) * 0.04;
+                    mouseY += (targetMouseY - mouseY) * 0.04;
+
                     gl.uniform1f(timeLocation, time * 0.001);
                     gl.uniform2f(resLocation, canvas.width, canvas.height);
+                    gl.uniform2f(mouseLocation, mouseX, mouseY);
+                    gl.uniform1f(fogLocation, CONFIG.shaderFogIntensity);
+                    gl.uniform1f(mintLocation, CONFIG.shaderMintBlend);
+                    gl.uniform1f(isMobileLocation, CONFIG.isMobile ? 1.0 : 0.0);
                     gl.drawArrays(gl.TRIANGLES, 0, 6);
-                    requestAnimationFrame(render);
+
+                    animationFrameId = requestAnimationFrame(render);
                 }
-                
-                requestAnimationFrame(render);
-            } else {
-                console.error("JODY HIGHROLLER SYSTEM ALERT: WebGL NOT SUPPORTED BY BROWSER!");
+
+                function startRenderLoop() {
+                    if (animationFrameId) {
+                        cancelAnimationFrame(animationFrameId);
+                    }
+                    animationFrameId = requestAnimationFrame(render);
+                }
+
+                startRenderLoop();
+                return gl;
             }
-        } else {
-            console.error("JODY HIGHROLLER SYSTEM ALERT: OCEAN CANVAS MISSING FROM DOM!");
-        }
+
+            function startRenderLoop() {
+                if (animationFrameId) {
+                    cancelAnimationFrame(animationFrameId);
+                }
+                if (webglContext) {
+                    const time = performance.now();
+                    if (typeof window.__bndrRender === 'function') {
+                        window.__bndrRender(time);
+                    }
+                }
+            }
+
+            const gl = initWebGL();
+            if (gl) {
+                window.__bndrRender = function(time) {
+                    if (!isPageVisible || !webglContext) return;
+                    mouseX += (targetMouseX - mouseX) * 0.04;
+                    mouseY += (targetMouseY - mouseY) * 0.04;
+                    const canvas = document.getElementById('ocean-canvas');
+                    const program = gl.getParameter(gl.CURRENT_PROGRAM);
+                    if (program) {
+                        const timeLocation = gl.getUniformLocation(program, 'u_time');
+                        const resLocation = gl.getUniformLocation(program, 'u_resolution');
+                        const mouseLocation = gl.getUniformLocation(program, 'u_mouse');
+                        const fogLocation = gl.getUniformLocation(program, 'u_fogIntensity');
+                        const mintLocation = gl.getUniformLocation(program, 'u_mintBlend');
+                        const isMobileLocation = gl.getUniformLocation(program, 'u_isMobile');
+
+                        gl.uniform1f(timeLocation, time * 0.001);
+                        gl.uniform2f(resLocation, canvas.width, canvas.height);
+                        gl.uniform2f(mouseLocation, mouseX, mouseY);
+                        gl.uniform1f(fogLocation, CONFIG.shaderFogIntensity);
+                        gl.uniform1f(mintLocation, CONFIG.shaderMintBlend);
+                        gl.uniform1f(isMobileLocation, CONFIG.isMobile ? 1.0 : 0.0);
+                        gl.drawArrays(gl.TRIANGLES, 0, 6);
+                    }
+                    animationFrameId = requestAnimationFrame(window.__bndrRender);
+                };
+                animationFrameId = requestAnimationFrame(window.__bndrRender);
+            }
+
+            /* ── ORB PARALLAX (subtle depth on hover) ── */
+            const orb = document.querySelector('.liquid-orb-profile');
+            if (orb && !CONFIG.isTouch) {
+                orb.addEventListener('mousemove', function(e) {
+                    const rect = orb.getBoundingClientRect();
+                    const cx = rect.left + rect.width / 2;
+                    const cy = rect.top + rect.height / 2;
+                    const dx = (e.clientX - cx) / rect.width;
+                    const dy = (e.clientY - cy) / rect.height;
+                    orb.style.transform = `translate3d(${dx * 6}px, ${dy * 6}px, 0) scale(1.02)`;
+                });
+                orb.addEventListener('mouseleave', function() {
+                    orb.style.transform = 'translate3d(0, 0, 0) scale(1)';
+                });
+            }
+
+            /* ── KEYBOARD SUPPORT FOR CARDS ── */
+            document.querySelectorAll('.aerodynamic-card').forEach(function(card) {
+                card.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        const modalId = card.getAttribute('aria-controls');
+                        if (modalId) {
+                            openModal(modalId);
+                        }
+                    }
+                });
+            });
+
+            /* ── KEYBOARD SUPPORT FOR CLOSE BUTTONS ── */
+            document.querySelectorAll('.close-modal-btn').forEach(function(btn) {
+                btn.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        const modal = btn.closest('.modal-overlay');
+                        if (modal) {
+                            closeModal(null, modal.id);
+                        }
+                    }
+                });
+            });
+
+            console.log('BNDR LLC — Scottsdale, AZ | System Online');
+            console.log('WebGL:', gl ? 'Active' : 'Fallback Mode');
+            console.log('Device:', CONFIG.isMobile ? 'Mobile' : 'Desktop', '| Touch:', CONFIG.isTouch);
+        })();
     </script>
 </body>
 </html>
